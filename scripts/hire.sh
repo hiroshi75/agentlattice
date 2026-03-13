@@ -54,12 +54,8 @@ fi
 # Get loop interval from config
 LOOP_INTERVAL=$(config_get "default_loop_interval" "5m")
 
-# Open a new tmux pane and start claude
-tmux split-window -h "cd '$AGENT_DIR' && claude"
-
-# Wait for claude to initialize, then send /loop
-sleep 3
-tmux send-keys -t '{last}' "/loop $LOOP_INTERVAL" Enter
+# Open a new tmux pane and start claude with /loop
+tmux split-window -h "cd '$AGENT_DIR' && claude \"/loop $LOOP_INTERVAL あなたのタスクを実行して\""
 
 echo "Agent '$AGENT_NAME' hired successfully in company '$COMPANY_NAME'."
 echo "A new tmux pane has been opened with Claude Code in $AGENT_DIR"

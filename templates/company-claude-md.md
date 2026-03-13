@@ -142,7 +142,7 @@ bash $AGENTLATTICE_ROOT/scripts/hire.sh {{company_name}} <agent-name>
 1. `org/roster.json` で該当エージェントの `status` が `"suspended"` であることを確認
 2. tmuxで新しいペインを開いてエージェントを起動：
    ```bash
-   tmux split-window -h "cd agents/<agent-name> && claude"
+   tmux split-window -h "cd agents/<agent-name> && claude \"/loop 5m あなたのタスクを実行して\""
    ```
 3. `org/roster.json` の `status` を `"active"` に更新
 4. エージェントは `CLAUDE.md` と `.claude/skills/` を自動認識して復帰します
