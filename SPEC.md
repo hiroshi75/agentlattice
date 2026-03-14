@@ -77,6 +77,7 @@ agentlattice/
   "default_loop_interval": "5m",
   "default_channels": ["general", "management"],
   "max_panes_per_window": 4,
+  "dashboard_port": 8390,
   "user_name": "ayu"
 }
 ```
@@ -87,6 +88,7 @@ agentlattice/
 | `default_loop_interval` | string | `/loop` のデフォルト間隔 |
 | `default_channels` | string[] | 企業初期化時に自動作成するチャネル（`management` を含めることを推奨） |
 | `max_panes_per_window` | number | 1つのtmuxウィンドウあたりの最大ペイン数（デフォルト: 4）。超過時は新しいウィンドウを作成 |
+| `dashboard_port` | number | ダッシュボードサーバーのポート番号（デフォルト: 8390） |
 | `user_name` | string | 管理コンソールの送信者名 |
 
 ## コア概念

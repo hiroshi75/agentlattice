@@ -16,7 +16,8 @@ if [[ $# -lt 1 ]]; then
 fi
 
 COMPANY_NAME="$1"
-PORT="${2:-8390}"
+DEFAULT_PORT=$(config_get "dashboard_port" "8390")
+PORT="${2:-$DEFAULT_PORT}"
 COMPANY_DIR="$AGENTLATTICE_HOME/$COMPANY_NAME"
 
 if [[ ! -d "$COMPANY_DIR" ]]; then
