@@ -33,6 +33,8 @@ agentlattice/
     ├── fire.sh                      # エージェント停止（個別）
     ├── start.sh                     # 企業の全activeエージェントを一括起動
     ├── stop.sh                      # 企業の全エージェントを一括停止（status保持）
+    ├── export.sh                    # 企業をポータブルなアーカイブにエクスポート
+    ├── import.sh                    # アーカイブから企業をインポート
     ├── list.sh                      # 稼働中エージェント一覧
     ├── status.sh                    # エージェント稼働メトリクス
     ├── dashboard.sh                 # Webダッシュボードサーバー

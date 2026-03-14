@@ -95,7 +95,32 @@ bash scripts/stop.sh <company-name>
 
 停止時、roster.json の status は変更されません（active のまま保持）。これにより次回 `start.sh` で同じエージェント構成を復元できます。
 
-### 5. 企業の状態確認
+### 5. 企業のエクスポート
+
+ユーザーが「<企業名>をエクスポート」と依頼したら、`scripts/export.sh` を使ってポータブルなアーカイブを作成します：
+
+```bash
+bash scripts/export.sh <company-name> [出力ディレクトリ]
+```
+
+これにより以下を含む `.tar.gz` ファイルが生成されます：
+- 企業ディレクトリ全体（CLAUDE.md、org/、agents/）
+- 各エージェントのセッション要約（memory/session-summary.md）
+- メタデータ（manifest.json）
+
+Claude Code のセッション履歴はパス依存のためエクスポートできませんが、各エージェントの memory/ と直近のチャネル活動から `session-summary.md` を自動生成します。
+
+### 6. 企業のインポート
+
+エクスポートされたアーカイブを取り込むには：
+
+```bash
+bash scripts/import.sh <archive-path>
+```
+
+展開後、`start.sh` で全エージェントを起動できます。
+
+### 7. 企業の状態確認
 
 特定の企業について詳細情報を表示します：
 
@@ -112,7 +137,7 @@ bash scripts/stop.sh <company-name>
 | 企業ディレクトリ | `~/.agentlattice/` | 作成された企業群（git管理外） |
 | ペルソナ一覧 | `templates/personas/` | エージェントに割り当て可能なペルソナ定義 |
 | スキル一覧 | `templates/skills/` | エージェントに割り当て可能なスキル |
-| 管理スクリプト | `scripts/` | init.sh, hire.sh, fire.sh, start.sh, stop.sh 等 |
+| 管理スクリプト | `scripts/` | init.sh, hire.sh, fire.sh, start.sh, stop.sh, export.sh, import.sh 等 |
 | テンプレート | `templates/` | CLAUDE.md生成用テンプレート |
 
 ## ツール

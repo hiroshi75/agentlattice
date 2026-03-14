@@ -115,6 +115,10 @@ agentlattice/
     ├── init.sh                  # Initialize a new company
     ├── hire.sh                  # Launch agent in tmux (tiled layout)
     ├── fire.sh                  # Suspend an agent
+    ├── start.sh                 # Start all active agents
+    ├── stop.sh                  # Stop all agents (preserve status)
+    ├── export.sh                # Export company to portable archive
+    ├── import.sh                # Import company from archive
     ├── list.sh                  # List companies/agents
     ├── status.sh                # Agent activity metrics
     ├── dashboard.sh             # Web dashboard server
@@ -178,6 +182,22 @@ Agents with the `hire-agent` skill can recruit new team members autonomously —
 ### tmux Layout
 
 Agents are arranged in tiled layout. When a window reaches `max_panes_per_window` (default: 4), new agents open in a new tmux window automatically.
+
+### Portability (Export / Import)
+
+Companies can be exported to a portable archive and imported on another machine:
+
+```bash
+# Export
+bash scripts/export.sh my-startup ~/Desktop
+# → my-startup_20260314_120000.tar.gz
+
+# Import (on another machine)
+bash scripts/import.sh my-startup_20260314_120000.tar.gz
+bash scripts/start.sh my-startup
+```
+
+Claude Code sessions are path-dependent and cannot be transferred. Instead, `export.sh` generates a `session-summary.md` for each agent containing their memory files, recent channel activity, and workspace file list. Agents read these summaries on startup to restore context.
 
 ## Included Templates
 
