@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgentLattice Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+    background: #0d1117; color: #c9d1d9; padding: 20px;
+  }
+  h1 { color: #58a6ff; margin-bottom: 8px; font-size: 1.5em; }
+  h2 { color: #8b949e; font-size: 1.1em; margin: 20px 0 10px; border-bottom: 1px solid #21262d; padding-bottom: 6px; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .last-update { color: #484f58; font-size: 0.85em; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 16px; }
+  .card h3 { color: #58a6ff; font-size: 0.95em; margin-bottom: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
+  th { text-align: left; color: #8b949e; padding: 6px 8px; border-bottom: 1px solid #21262d; }
+  td { padding: 6px 8px; border-bottom: 1px solid #21262d; }
+  .status-active { color: #3fb950; }
+  .status-suspended { color: #f85149; }
+  .msg { padding: 6px 0; border-bottom: 1px solid #21262d; font-size: 0.85em; }
+  .msg-from { color: #d2a8ff; font-weight: bold; }
+  .msg-time { color: #484f58; font-size: 0.8em; }
+  .msg-body { color: #c9d1d9; margin-top: 2px; }
+  .knowledge-list { list-style: none; }
+  .knowledge-list li { padding: 4px 0; font-size: 0.85em; color: #8b949e; }
+  .knowledge-list li::before { content: "📄 "; }
+  .dashboard-content { line-height: 1.6; }
+  .dashboard-content h1, .dashboard-content h2, .dashboard-content h3 { color: #58a6ff; }
+  .dashboard-content ul, .dashboard-content ol { padding-left: 20px; }
+  .dashboard-content code { background: #21262d; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+  .dashboard-content pre { background: #21262d; padding: 12px; border-radius: 6px; overflow-x: auto; }
+  .dashboard-content table { margin: 8px 0; }
+  .channel-tabs { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .channel-tab {
+    padding: 4px 12px; border-radius: 4px; font-size: 0.8em; cursor: pointer;
+    background: #21262d; color: #8b949e; border: 1px solid #30363d;
+  }
+  .channel-tab.active { background: #1f6feb; color: #fff; border-color: #1f6feb; }
+  .channel-tab .count { margin-left: 4px; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🔷 AgentLattice Dashboard</h1>
+  <span class="last-update" id="lastUpdate">Loading...</span>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>👥 Team Roster</h3>
+    <table>
+      <thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+      <tbody id="rosterBody"></tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h3>📄 Shared Knowledge</h3>
+    <ul class="knowledge-list" id="knowledgeList"></ul>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom: 16px;">
+  <h3>💬 Channel Activity</h3>
+  <div class="channel-tabs" id="channelTabs"></div>
+  <div id="channelMessages"></div>
+</div>
+
+<div class="card">
+  <h3>📊 Dashboard Report</h3>
+  <div class="dashboard-content" id="dashboardContent"></div>
+</div>
+
+<script>
+let currentChannel = null;
+let channelsData = {};
+
+async function fetchJSON(url) {
+  try {
+    const res = await fetch(url);
+    return res.ok ? await res.json() : null;
+  } catch { return null; }
+}
+
+async function fetchText(url) {
+  try {
+    const res = await fetch(url);
+    return res.ok ? await res.text() : null;
+  } catch { return null; }
+}
+
+function renderRoster(data) {
+  const tbody = document.getElementById('rosterBody');
+  if (!data || !data.agents || data.agents.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="color:#484f58">No agents hired yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.agents.map(a => `
+    <tr>
+      <td>${a.display_name || a.name} <span style="color:#484f58">(${a.name})</span></td>
+      <td style="color:#8b949e">${a.description || '-'}</td>
+      <td class="status-${a.status}">${a.status}</td>
+    </tr>
+  `).join('');
+}
+
+function renderChannels(data) {
+  channelsData = data || {};
+  const tabs = document.getElementById('channelTabs');
+  const names = Object.keys(channelsData);
+  if (names.length === 0) {
+    tabs.innerHTML = '<span style="color:#484f58">No channels</span>';
+    document.getElementById('channelMessages').innerHTML = '';
+    return;
+  }
+  if (!currentChannel || !channelsData[currentChannel]) {
+    currentChannel = names[0];
+  }
+  tabs.innerHTML = names.map(name => {
+    const count = channelsData[name].total_messages;
+    const active = name === currentChannel ? ' active' : '';
+    return `<div class="channel-tab${active}" onclick="switchChannel('${name}')">#${name}<span class="count">(${count})</span></div>`;
+  }).join('');
+  renderMessages();
+}
+
+function switchChannel(name) {
+  currentChannel = name;
+  renderChannels(channelsData);
+}
+
+function renderMessages() {
+  const container = document.getElementById('channelMessages');
+  const ch = channelsData[currentChannel];
+  if (!ch || ch.recent.length === 0) {
+    container.innerHTML = '<div style="color:#484f58;font-size:0.85em">No messages</div>';
+    return;
+  }
+  container.innerHTML = ch.recent.slice().reverse().map(m => `
+    <div class="msg">
+      <span class="msg-from">${m.from}</span>
+      <span class="msg-time">${m.ts ? new Date(m.ts).toLocaleString('ja-JP') : ''}</span>
+      <div class="msg-body">${escapeHtml(m.body || '')}</div>
+    </div>
+  `).join('');
+}
+
+function escapeHtml(s) {
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+function renderKnowledge(data) {
+  const list = document.getElementById('knowledgeList');
+  if (!data || data.length === 0) {
+    list.innerHTML = '<li style="color:#484f58">No knowledge files</li>';
+    return;
+  }
+  list.innerHTML = data.map(f => `<li>${f.name}</li>`).join('');
+}
+
+function renderDashboard(md) {
+  const el = document.getElementById('dashboardContent');
+  if (!md) {
+    el.innerHTML = '<span style="color:#484f58">No dashboard report available</span>';
+    return;
+  }
+  el.innerHTML = marked.parse(md);
+}
+
+async function refresh() {
+  const [roster, channels, knowledge, dashboard] = await Promise.all([
+    fetchJSON('/api/roster'),
+    fetchJSON('/api/channels'),
+    fetchJSON('/api/knowledge'),
+    fetchText('/api/dashboard'),
+  ]);
+  renderRoster(roster);
+  renderChannels(channels);
+  renderKnowledge(knowledge);
+  renderDashboard(dashboard);
+  document.getElementById('lastUpdate').textContent = 'Last update: ' + new Date().toLocaleTimeString('ja-JP');
+}
+
+refresh();
+setInterval(refresh, 10000);
+</script>
+</body>
+</html>

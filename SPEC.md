@@ -75,7 +75,7 @@ agentlattice/
 {
   "agentlattice_root": "/Users/ayu/dev/agentlattice",
   "default_loop_interval": "5m",
-  "default_channels": ["general"],
+  "default_channels": ["general", "management"],
   "max_panes_per_window": 4,
   "user_name": "ayu"
 }
@@ -85,7 +85,7 @@ agentlattice/
 |---|---|---|
 | `agentlattice_root` | string | システムコード（テンプレート・スクリプト）のパス |
 | `default_loop_interval` | string | `/loop` のデフォルト間隔 |
-| `default_channels` | string[] | 企業初期化時に自動作成するチャネル |
+| `default_channels` | string[] | 企業初期化時に自動作成するチャネル（`management` を含めることを推奨） |
 | `max_panes_per_window` | number | 1つのtmuxウィンドウあたりの最大ペイン数（デフォルト: 4）。超過時は新しいウィンドウを作成 |
 | `user_name` | string | 管理コンソールの送信者名 |
 
@@ -115,6 +115,7 @@ agentlattice/
   "to": null,
   "mentions": ["bob"],
   "type": "message",
+  "reply_to": null,
   "body": "@bob 競合分析の結果をまとめました。knowledge/competitor-analysis.md を参照してください。"
 }
 ```
@@ -130,11 +131,13 @@ agentlattice/
 | `to` | string\|null | DM相手（チャネル投稿時はnull） |
 | `mentions` | string[] | メンション対象エージェント名 |
 | `type` | string | `message`, `task_update`, `request`, `report` |
+| `reply_to` | string\|null | 返信先メッセージID（スレッド機能。新規投稿時はnull） |
 | `body` | string | 本文（Markdown可） |
 
 #### チャネル種別
 
 - `general` — 全体連絡用（デフォルト）
+- `management` — management専用指示チャネル（エージェントは最優先で確認）
 - 業務別チャネル（`engineering`, `marketing` 等）— 必要に応じて作成
 - DMはチャネルを使わず `to` フィールドで実現（ファイルは `channels/dm_<a>_<b>.jsonl`）
 
@@ -220,6 +223,7 @@ echo '{"agents":[]}' > "$COMPANY_DIR/org/roster.json"
 1. **対話的にエージェントを設計**（名前、ペルソナ、スキル、担当チャネル）
 2. `agents/<name>/` ディレクトリを作成
 3. ペルソナをブレンドして `CLAUDE.md` を生成
+   - Gitリポジトリが指定されている場合は「コミット前ビルド確認」「git pull先行」ルールを含める
 4. 選択されたスキルを `.claude/skills/` にコピー
 5. `org/roster.json` に追加
 6. tmuxの新ペインで `claude` を起動
@@ -464,4 +468,4 @@ Phase 1で実現する最小構成：
 - タスクボード（backlog → in_progress → done の自動管理）
 - エージェント間の評価・フィードバック機構
 - 解雇時の引き継ぎレポート自動生成
-- Web UIダッシュボード（オプション）
+- ~~Web UIダッシュボード（オプション）~~ → 実装済み（`scripts/dashboard.sh` + `templates/dashboard/index.html`）

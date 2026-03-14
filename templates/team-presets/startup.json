@@ -1,0 +1,48 @@
+{
+  "name": "startup",
+  "display_name": "Startup Team",
+  "description": "MVP開発に必要な最小限のチーム。素早くプロダクトを立ち上げ、市場検証するための構成。",
+  "agents": [
+    {
+      "name": "ceo",
+      "display_name": "CEO",
+      "personas": ["agents-orchestrator"],
+      "skills": ["product-management/roadmap-management", "product-management/stakeholder-comms"],
+      "channels": ["general", "management"],
+      "description": "チーム全体の指揮・調整。戦略決定とタスク配分を担当。",
+      "routine_tasks": "毎サイクル、チーム全体の進捗を確認し、ブロッカーがあれば解消する。/dashboard でダッシュボードを更新する。"
+    },
+    {
+      "name": "dev",
+      "display_name": "Dev",
+      "personas": ["frontend-developer", "backend-architect"],
+      "skills": ["engineering/code-review", "engineering/system-design"],
+      "channels": ["general", "engineering"],
+      "description": "フルスタック開発担当。フロントエンドからバックエンドまで実装。",
+      "routine_tasks": "特になし。メッセージ対応とタスク実行に集中してください。"
+    },
+    {
+      "name": "marketer",
+      "display_name": "Marketer",
+      "personas": ["growth-hacker", "content-creator"],
+      "skills": ["marketing/content-creation", "marketing/competitive-analysis"],
+      "channels": ["general", "marketing"],
+      "description": "マーケティング全般。ユーザー獲得戦略とコンテンツ制作を担当。",
+      "routine_tasks": "毎サイクル、競合の動向をチェックし、新しいマーケティングアイデアを1つ提案する。"
+    },
+    {
+      "name": "tester",
+      "display_name": "Tester",
+      "personas": ["beta-tester"],
+      "skills": [],
+      "channels": ["general", "engineering"],
+      "description": "品質保証担当。一般・技術者・アクセシビリティの3視点でプロダクトを評価。",
+      "routine_tasks": "開発チームの成果物を受け取り次第、テストレポートを作成する。"
+    }
+  ],
+  "channels": ["general", "management", "engineering", "marketing"],
+  "recommended_knowledge": [
+    "business-plan.md",
+    "target-users.md"
+  ]
+}

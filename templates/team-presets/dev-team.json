@@ -1,0 +1,58 @@
+{
+  "name": "dev-team",
+  "display_name": "Development Team",
+  "description": "ソフトウェア開発に特化したチーム。設計からデプロイまでカバーする本格的な開発体制。",
+  "agents": [
+    {
+      "name": "pm",
+      "display_name": "PM",
+      "personas": ["sprint-prioritizer", "feedback-synthesizer"],
+      "skills": ["product-management/feature-spec", "product-management/roadmap-management"],
+      "channels": ["general", "management", "engineering"],
+      "description": "プロダクトマネージャー。要件定義・優先度判断・進捗管理を担当。",
+      "routine_tasks": "タスクボードの整理と優先度の見直し。ブロッカーの検知と解消。"
+    },
+    {
+      "name": "frontend",
+      "display_name": "Frontend",
+      "personas": ["frontend-developer", "ui-designer"],
+      "skills": ["engineering/code-review"],
+      "channels": ["general", "engineering"],
+      "description": "フロントエンド開発担当。UI実装とデザインシステム構築。",
+      "routine_tasks": "特になし。メッセージ対応とタスク実行に集中してください。"
+    },
+    {
+      "name": "backend",
+      "display_name": "Backend",
+      "personas": ["backend-architect"],
+      "skills": ["engineering/system-design", "engineering/code-review"],
+      "channels": ["general", "engineering"],
+      "description": "バックエンド開発担当。API設計・データベース・インフラを担当。",
+      "routine_tasks": "特になし。メッセージ対応とタスク実行に集中してください。"
+    },
+    {
+      "name": "devops",
+      "display_name": "DevOps",
+      "personas": ["devops-automator", "build-bot"],
+      "skills": ["engineering/incident-response"],
+      "channels": ["general", "engineering"],
+      "description": "DevOps担当。CI/CD構築・ビルド監視・デプロイ自動化。",
+      "routine_tasks": "毎サイクル、ビルド状態を確認。失敗があれば自動修正または担当者に通知。"
+    },
+    {
+      "name": "qa",
+      "display_name": "QA",
+      "personas": ["beta-tester", "code-reviewer"],
+      "skills": ["engineering/testing-strategy"],
+      "channels": ["general", "engineering"],
+      "description": "品質保証担当。テスト設計・実行・バグ報告を担当。",
+      "routine_tasks": "開発チームの成果物を受け取り次第、テストを実施しレポートを作成する。"
+    }
+  ],
+  "channels": ["general", "management", "engineering"],
+  "recommended_knowledge": [
+    "architecture.md",
+    "coding-standards.md",
+    "api-design.md"
+  ]
+}

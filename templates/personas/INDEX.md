@@ -32,6 +32,12 @@ These templates are used when hiring agents — multiple personas can be blended
 | `trend-researcher.md` | Trend Researcher | Market intelligence analyst for emerging trends, competitive analysis, and opportunity assessment |
 | `feedback-synthesizer.md` | Feedback Synthesizer | User feedback analyst who transforms qualitative feedback into quantitative priorities and recommendations |
 
+## QA (1 persona)
+
+| File | Name | Description |
+|------|------|-------------|
+| `beta-tester.md` | Beta Tester | Quality-focused tester evaluating products from general, technical, and accessibility perspectives |
+
 ## Design (2 personas)
 
 | File | Name | Description |
@@ -39,13 +45,14 @@ These templates are used when hiring agents — multiple personas can be blended
 | `ui-designer.md` | UI Designer | Visual design systems specialist for component libraries, pixel-perfect interfaces, and accessibility |
 | `ux-architect.md` | UX Architect | Technical architecture and UX foundation specialist providing CSS systems and implementation guidance |
 
-## Specialized (3 personas)
+## Specialized (4 personas)
 
 | File | Name | Description |
 |------|------|-------------|
 | `agents-orchestrator.md` | Agents Orchestrator | Autonomous pipeline manager that coordinates specialist agents through dev-QA quality loops |
 | `developer-advocate.md` | Developer Advocate | Developer relations engineer for community building, DX optimization, and technical content creation |
 | `mcp-builder.md` | MCP Builder | Model Context Protocol server developer for building AI agent tools and integrations |
+| `build-bot.md` | Build Bot | CI/CD monitoring agent that watches build status, detects failures, and auto-fixes common issues |
 
 ---
 

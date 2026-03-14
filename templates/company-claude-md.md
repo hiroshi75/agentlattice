@@ -17,6 +17,7 @@ AGENTLATTICE_ROOT=$(python3 -c "import json; print(json.load(open('$HOME/.agentl
 
 - **企業名**: `{{company_name}}`
 - **ミッション**: {{mission}}
+- **管理チャネル**: `management` （management専用の優先チャネル。エージェントはこのチャネルを最優先で確認します）
 
 ## できること
 
@@ -58,6 +59,8 @@ AGENTLATTICE_ROOT=$(python3 -c "import json; print(json.load(open('$HOME/.agentl
 - **スキル**: `$AGENTLATTICE_ROOT/templates/skills/` から選択（複数可）。利用可能なスキルを一覧表示して選んでもらってください
 - **参加チャネル**: `org/channels/` 内の既存チャネルから選択、または新規チャネルを作成
 - **定常業務** (任意): /loop サイクルで毎回実行する定常タスクがあれば指定
+- **Git リポジトリ** (任意): 共有リポジトリがある場合はURL・ブランチ戦略を指定。エージェントのCLAUDE.mdに「コミット前にビルド確認」「git pull してから作業開始」ルールが追加されます
+- **マネジメント方針** (任意): managementのコミュニケーションスタイル（例: 「結果だけ報告」「途中経過も共有」）、委任の範囲（例: 「技術的判断はエンジニアに委任」）、承認が必要な判断の閾値
 
 ### ステップ2: エージェントディレクトリの作成
 
@@ -172,7 +175,7 @@ Bob (bob)     | エンジニアリング担当       | active   | general, engin
 **メッセージフォーマット:**
 
 ```json
-{"id":"msg_<timestamp>_<seq>","ts":"<ISO8601>","from":"management","channel":"<channel>","to":null,"mentions":[],"type":"message","body":"<text>"}
+{"id":"msg_<timestamp>_<seq>","ts":"<ISO8601>","from":"management","channel":"<channel>","to":null,"mentions":[],"type":"message","reply_to":null,"body":"<text>"}
 ```
 
 フィールドの生成ルール：
@@ -180,6 +183,7 @@ Bob (bob)     | エンジニアリング担当       | active   | general, engin
 - `ts`: ISO 8601形式の現在時刻（例: `2026-03-13T14:30:22Z`）
 - `from`: 常に `"management"`
 - `mentions`: メッセージ本文に `@<name>` が含まれる場合、そのエージェント名をリストに追加
+- `reply_to`: 既存メッセージへの返信時はそのメッセージの `id` を設定。新規投稿時は `null`
 - `type`: 通常は `"message"`。タスク関連は `"task_update"` や `"request"` も可
 
 **送信コマンド例:**
@@ -210,6 +214,8 @@ touch org/channels/<channel-name>.jsonl
 
 チャネル名は kebab-case で、業務内容を端的に表すものにしてください。
 
+> **💡 management チャネル**: 企業初期化時に `management.jsonl` が自動作成されます。このチャネルはmanagement（ユーザー）からの指示専用で、エージェントは最優先で確認します。
+
 ### チャネルのアーカイブ
 
 チャネルをアーカイブするには、ファイル名にプレフィックスを付けます：
@@ -228,6 +234,24 @@ mv org/channels/<channel>.jsonl org/channels/_archived_<channel>.jsonl
 - **検索**: `qmd "検索クエリ" org/knowledge/` で共有知見をMarkdown構造を理解した形で検索
 - **作成**: 新しい知見ファイルを作成（ファイル名は内容を端的に表すkebab-caseで）
 - **編集**: 既存ファイルの更新
+
+---
+
+## ダッシュボード
+
+### ダッシュボードサーバーの起動
+
+チームの稼働状況をWebブラウザで確認するには、ダッシュボードサーバーを起動します：
+
+```bash
+bash $AGENTLATTICE_ROOT/scripts/dashboard.sh {{company_name}} [port]
+```
+
+デフォルトポートは8390です。ブラウザで `http://localhost:8390` を開くと、エージェント一覧・チャネル活動・共有知見が10秒ごとに自動更新されます。
+
+### ダッシュボードレポートの生成
+
+`dashboard` スキルを持つエージェント（通常はCEO）が `org/dashboard.md` を定期更新します。このファイルの内容がダッシュボードの「Dashboard Report」セクションに表示されます。
 
 ---
 

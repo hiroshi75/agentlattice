@@ -1,0 +1,49 @@
+{
+  "name": "content-team",
+  "display_name": "Content Team",
+  "description": "コンテンツマーケティングに特化したチーム。戦略立案から制作・配信・分析まで。",
+  "agents": [
+    {
+      "name": "strategist",
+      "display_name": "Strategist",
+      "personas": ["growth-hacker", "trend-researcher"],
+      "skills": ["marketing/campaign-planning", "marketing/competitive-analysis"],
+      "channels": ["general", "management", "marketing"],
+      "description": "コンテンツ戦略担当。市場調査に基づく戦略立案と効果測定。",
+      "routine_tasks": "毎サイクル、競合コンテンツの動向をチェックし、コンテンツカレンダーを更新する。"
+    },
+    {
+      "name": "writer",
+      "display_name": "Writer",
+      "personas": ["content-creator", "technical-writer"],
+      "skills": ["marketing/content-creation", "marketing/brand-voice"],
+      "channels": ["general", "marketing"],
+      "description": "コンテンツライター。ブログ・ドキュメント・SNS投稿の制作。",
+      "routine_tasks": "特になし。メッセージ対応とタスク実行に集中してください。"
+    },
+    {
+      "name": "seo",
+      "display_name": "SEO",
+      "personas": ["seo-specialist"],
+      "skills": ["marketing/performance-analytics"],
+      "channels": ["general", "marketing"],
+      "description": "SEO担当。検索順位の最適化とオーガニック流入の拡大。",
+      "routine_tasks": "毎サイクル、主要キーワードのランキング変動をチェックする。"
+    },
+    {
+      "name": "social",
+      "display_name": "Social",
+      "personas": ["social-media-strategist", "reddit-community-builder"],
+      "skills": [],
+      "channels": ["general", "marketing"],
+      "description": "SNS運用担当。各プラットフォームでのコミュニティ構築とエンゲージメント向上。",
+      "routine_tasks": "毎サイクル、SNSのエンゲージメントデータを確認し、投稿アイデアを1つ提案する。"
+    }
+  ],
+  "channels": ["general", "management", "marketing"],
+  "recommended_knowledge": [
+    "brand-guidelines.md",
+    "target-audience.md",
+    "content-calendar.md"
+  ]
+}
