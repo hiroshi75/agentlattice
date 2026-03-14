@@ -2,9 +2,10 @@
   "name": "content-team",
   "display_name": "Content Team",
   "description": "コンテンツマーケティングに特化したチーム。戦略立案から制作・配信・分析まで。",
+  "note": "エージェント名は <個人名>-<役割名> 形式。個人名は雇用時にユーザーが指定してください。",
   "agents": [
     {
-      "name": "strategist",
+      "name_template": "{name}-strategist",
       "display_name": "Strategist",
       "personas": ["growth-hacker", "trend-researcher"],
       "skills": ["marketing/campaign-planning", "marketing/competitive-analysis"],
@@ -13,7 +14,7 @@
       "routine_tasks": "毎サイクル、競合コンテンツの動向をチェックし、コンテンツカレンダーを更新する。"
     },
     {
-      "name": "writer",
+      "name_template": "{name}-writer",
       "display_name": "Writer",
       "personas": ["content-creator", "technical-writer"],
       "skills": ["marketing/content-creation", "marketing/brand-voice"],
@@ -22,7 +23,7 @@
       "routine_tasks": "特になし。メッセージ対応とタスク実行に集中してください。"
     },
     {
-      "name": "seo",
+      "name_template": "{name}-seo",
       "display_name": "SEO",
       "personas": ["seo-specialist"],
       "skills": ["marketing/performance-analytics"],
@@ -31,7 +32,7 @@
       "routine_tasks": "毎サイクル、主要キーワードのランキング変動をチェックする。"
     },
     {
-      "name": "social",
+      "name_template": "{name}-social",
       "display_name": "Social",
       "personas": ["social-media-strategist", "reddit-community-builder"],
       "skills": [],

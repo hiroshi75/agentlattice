@@ -38,7 +38,7 @@
    ```
    general: 42
    engineering: 18
-   dm_alice_bob: 7
+   dm_alice-marketing_bob-engineering: 7
    ```
 
 ### 2. メッセージトリアージ
@@ -119,7 +119,7 @@ echo '{"id":"msg_20260313_143022_001","ts":"2026-03-13T14:30:22Z","from":"{{agen
 **メンション付きメッセージの例:**
 
 ```bash
-echo '{"id":"msg_20260313_143100_001","ts":"2026-03-13T14:31:00Z","from":"{{agent_name}}","channel":"general","to":null,"mentions":["alice"],"type":"request","body":"@alice この件について確認させてください。"}' >> ../../org/channels/general.jsonl
+echo '{"id":"msg_20260313_143100_001","ts":"2026-03-13T14:31:00Z","from":"{{agent_name}}","channel":"general","to":null,"mentions":["alice-marketing"],"type":"request","body":"@alice-marketing この件について確認させてください。"}' >> ../../org/channels/general.jsonl
 ```
 
 ### 参加チャネル

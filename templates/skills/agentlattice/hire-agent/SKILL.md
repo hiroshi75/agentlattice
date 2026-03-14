@@ -35,7 +35,7 @@ AGENTLATTICE_ROOT=$(python3 -c "import json; print(json.load(open('$HOME/.agentl
 ### 2. エージェントの設計
 
 以下を決定してください：
-- **名前** (`name`): kebab-case。ディレクトリ名・通信上の識別子
+- **名前** (`name`): `<個人名>-<役割名>` のkebab-case形式（例: `kate-frontend`）。ディレクトリ名・通信上の識別子
 - **表示名** (`display_name`): 人が読む名前
 - **役割・担当業務の説明**: 期待する業務内容
 - **ペルソナ**: `$AGENTLATTICE_ROOT/templates/personas/INDEX.md` を参照して選択（複数ブレンド可）

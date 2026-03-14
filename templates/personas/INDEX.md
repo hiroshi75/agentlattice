@@ -62,7 +62,7 @@ When hiring an agent, reference personas by their kebab-case filename (without `
 
 ```json
 {
-  "name": "alice",
+  "name": "alice-marketing",
   "personas": ["growth-hacker", "seo-specialist"],
   "description": "Marketing generalist with SEO and growth expertise"
 }

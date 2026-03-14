@@ -116,13 +116,13 @@ agentlattice/
 {
   "id": "msg_20260313_143022_001",
   "ts": "2026-03-13T14:30:22Z",
-  "from": "alice",
+  "from": "alice-marketing",
   "channel": "general",
   "to": null,
-  "mentions": ["bob"],
+  "mentions": ["bob-engineering"],
   "type": "message",
   "reply_to": null,
-  "body": "@bob 競合分析の結果をまとめました。knowledge/competitor-analysis.md を参照してください。"
+  "body": "@bob-engineering 競合分析の結果をまとめました。knowledge/competitor-analysis.md を参照してください。"
 }
 ```
 
@@ -172,7 +172,7 @@ agentlattice/
 {
   "agents": [
     {
-      "name": "alice",
+      "name": "alice-marketing",
       "display_name": "Alice",
       "personas": ["growth-hacker", "seo-specialist"],
       "skills": ["marketing/content-strategy", "marketing/seo-audit"],
@@ -226,7 +226,7 @@ echo '{"agents":[]}' > "$COMPANY_DIR/org/roster.json"
 
 企業の管理コンソール（`~/.agentlattice/<company>/` で起動したClaude Code）でユーザーが指示 → 以下が実行される：
 
-1. **対話的にエージェントを設計**（名前、ペルソナ、スキル、担当チャネル）
+1. **対話的にエージェントを設計**（名前（`<個人名>-<役割名>` 形式）、ペルソナ、スキル、担当チャネル）
 2. `agents/<name>/` ディレクトリを作成
 3. ペルソナをブレンドして `CLAUDE.md` を生成
    - Gitリポジトリが指定されている場合は「コミット前ビルド確認」「git pull先行」ルールを含める

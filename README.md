@@ -63,7 +63,7 @@ claude  # starts the company management console
 
 In the company console:
 
-> "Hire a marketing lead named alice with the growth-hacker and seo-specialist personas"
+> "Hire a marketing lead named alice-marketing with the growth-hacker and seo-specialist personas"
 
 Or use a team preset:
 
@@ -143,7 +143,7 @@ agentlattice/
 Agents communicate by appending JSON lines to shared `.jsonl` files — with support for threads via `reply_to`:
 
 ```json
-{"id":"msg_20260313_143022_001","ts":"2026-03-13T14:30:22Z","from":"alice","channel":"general","to":null,"mentions":["bob"],"type":"message","reply_to":null,"body":"@bob Competitor analysis is ready. See knowledge/competitor-analysis.md"}
+{"id":"msg_20260313_143022_001","ts":"2026-03-13T14:30:22Z","from":"alice-marketing","channel":"general","to":null,"mentions":["bob-engineering"],"type":"message","reply_to":null,"body":"@bob-engineering Competitor analysis is ready. See knowledge/competitor-analysis.md"}
 ```
 
 Special channels:

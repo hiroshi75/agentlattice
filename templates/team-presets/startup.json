@@ -2,9 +2,10 @@
   "name": "startup",
   "display_name": "Startup Team",
   "description": "MVP開発に必要な最小限のチーム。素早くプロダクトを立ち上げ、市場検証するための構成。",
+  "note": "エージェント名は <個人名>-<役割名> 形式。個人名は雇用時にユーザーが指定してください。",
   "agents": [
     {
-      "name": "ceo",
+      "name_template": "{name}-ceo",
       "display_name": "CEO",
       "personas": ["agents-orchestrator"],
       "skills": ["product-management/roadmap-management", "product-management/stakeholder-comms"],
@@ -13,7 +14,7 @@
       "routine_tasks": "毎サイクル、チーム全体の進捗を確認し、ブロッカーがあれば解消する。/dashboard でダッシュボードを更新する。"
     },
     {
-      "name": "dev",
+      "name_template": "{name}-dev",
       "display_name": "Dev",
       "personas": ["frontend-developer", "backend-architect"],
       "skills": ["engineering/code-review", "engineering/system-design"],
@@ -22,7 +23,7 @@
       "routine_tasks": "特になし。メッセージ対応とタスク実行に集中してください。"
     },
     {
-      "name": "marketer",
+      "name_template": "{name}-marketing",
       "display_name": "Marketer",
       "personas": ["growth-hacker", "content-creator"],
       "skills": ["marketing/content-creation", "marketing/competitive-analysis"],
@@ -31,7 +32,7 @@
       "routine_tasks": "毎サイクル、競合の動向をチェックし、新しいマーケティングアイデアを1つ提案する。"
     },
     {
-      "name": "tester",
+      "name_template": "{name}-tester",
       "display_name": "Tester",
       "personas": ["beta-tester"],
       "skills": [],
