@@ -30,8 +30,12 @@ agentlattice/
 └── scripts/                         # 管理スクリプト
     ├── init.sh                      # 企業初期化
     ├── hire.sh                      # エージェント雇用（ディレクトリ作成+tmux起動）
-    ├── fire.sh                      # エージェント停止
+    ├── fire.sh                      # エージェント停止（個別）
+    ├── start.sh                     # 企業の全activeエージェントを一括起動
+    ├── stop.sh                      # 企業の全エージェントを一括停止（status保持）
     ├── list.sh                      # 稼働中エージェント一覧
+    ├── status.sh                    # エージェント稼働メトリクス
+    ├── dashboard.sh                 # Webダッシュボードサーバー
     └── channel.sh                   # チャネル操作
 
 # データ（git管理外: ~/.agentlattice/）

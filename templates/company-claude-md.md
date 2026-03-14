@@ -151,6 +151,30 @@ bash $AGENTLATTICE_ROOT/scripts/hire.sh {{company_name}} <agent-name>
 3. `org/roster.json` の `status` を `"active"` に更新
 4. エージェントは `CLAUDE.md` と `.claude/skills/` を自動認識して復帰します
 
+## 全エージェントの一括起動・停止
+
+### 一括起動
+
+全ての active エージェントを一括で tmux ペインに起動します：
+
+```bash
+bash $AGENTLATTICE_ROOT/scripts/start.sh {{company_name}}
+```
+
+`org/roster.json` で `status: "active"` の全エージェントが順次起動し、自動的に `/loop` で活動を開始します。前回の作業状態（CLAUDE.md、memory/、workspace/）はそのまま引き継がれます。
+
+### 一括停止
+
+全エージェントの tmux ペインを終了します：
+
+```bash
+bash $AGENTLATTICE_ROOT/scripts/stop.sh {{company_name}}
+```
+
+roster.json の status は変更されません（active のまま保持）。次回 `start.sh` で同じエージェント構成を復元できます。
+
+> **個別停止との違い**: `fire.sh` はエージェントの status を `"suspended"` に変更するため、次回 `start.sh` で起動されません。一括停止の `stop.sh` は status を変えないため、全員が次回起動対象になります。
+
 ## エージェント一覧の表示
 
 `org/roster.json` を読み込み、以下の形式で表示してください：

@@ -73,7 +73,29 @@ bash scripts/init.sh <company-name>
 
 `~/.agentlattice/` ディレクトリが存在しない、または空の場合は「まだ企業が作成されていません」と案内してください。
 
-### 3. 企業の状態確認
+### 3. 企業の起動
+
+ユーザーが「<企業名>を起動」と依頼したら、`scripts/start.sh` を使って全ての active エージェントを一括起動します：
+
+```bash
+bash scripts/start.sh <company-name>
+```
+
+これにより `org/roster.json` で `status: "active"` の全エージェントが tmux ペインで起動し、自動的に `/loop` で活動を開始します。
+
+> **注意**: tmux セッション内で実行する必要があります。
+
+### 4. 企業の停止
+
+ユーザーが「<企業名>を停止」と依頼したら、`scripts/stop.sh` を使って全エージェントの tmux ペインを終了します：
+
+```bash
+bash scripts/stop.sh <company-name>
+```
+
+停止時、roster.json の status は変更されません（active のまま保持）。これにより次回 `start.sh` で同じエージェント構成を復元できます。
+
+### 5. 企業の状態確認
 
 特定の企業について詳細情報を表示します：
 
@@ -90,7 +112,7 @@ bash scripts/init.sh <company-name>
 | 企業ディレクトリ | `~/.agentlattice/` | 作成された企業群（git管理外） |
 | ペルソナ一覧 | `templates/personas/` | エージェントに割り当て可能なペルソナ定義 |
 | スキル一覧 | `templates/skills/` | エージェントに割り当て可能なスキル |
-| 管理スクリプト | `scripts/` | init.sh, hire.sh, fire.sh 等 |
+| 管理スクリプト | `scripts/` | init.sh, hire.sh, fire.sh, start.sh, stop.sh 等 |
 | テンプレート | `templates/` | CLAUDE.md生成用テンプレート |
 
 ## ツール
