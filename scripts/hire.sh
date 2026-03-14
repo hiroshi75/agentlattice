@@ -51,12 +51,26 @@ if [[ -z "${TMUX:-}" ]]; then
   exit 1
 fi
 
-# Get loop interval from config
+# Get config values
 LOOP_INTERVAL=$(config_get "default_loop_interval" "5m")
+MAX_PANES=$(config_get "max_panes_per_window" "4")
 
-# Open a new tmux pane and start claude with /loop
-tmux split-window -h "cd '$AGENT_DIR' && claude \"/loop $LOOP_INTERVAL あなたのタスクを実行して\""
+STARTUP_CMD="cd '$AGENT_DIR' && claude \"/loop $LOOP_INTERVAL あなたのタスクを実行して\""
+
+# Get current pane count in the active window
+CURRENT_PANES=$(tmux list-panes | wc -l | tr -d ' ')
+
+if [[ "$CURRENT_PANES" -ge "$MAX_PANES" ]]; then
+  # Current window is full — create a new window and apply tiled layout there
+  tmux new-window "$STARTUP_CMD"
+  tmux select-layout tiled
+else
+  # Split within the current window and re-tile
+  tmux split-window -h "$STARTUP_CMD"
+  tmux select-layout tiled
+fi
 
 echo "Agent '$AGENT_NAME' hired successfully in company '$COMPANY_NAME'."
 echo "A new tmux pane has been opened with Claude Code in $AGENT_DIR"
 echo "Auto-started /loop with interval $LOOP_INTERVAL"
+echo "Layout: tiled (max $MAX_PANES panes per window)"

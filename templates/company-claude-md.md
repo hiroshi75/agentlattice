@@ -140,10 +140,11 @@ bash $AGENTLATTICE_ROOT/scripts/hire.sh {{company_name}} <agent-name>
 停止中のエージェントを再起動するには：
 
 1. `org/roster.json` で該当エージェントの `status` が `"suspended"` であることを確認
-2. tmuxで新しいペインを開いてエージェントを起動：
+2. `hire.sh` を使ってtmuxペインを開いてエージェントを起動：
    ```bash
-   tmux split-window -h "cd agents/<agent-name> && claude \"/loop 5m あなたのタスクを実行して\""
+   bash $AGENTLATTICE_ROOT/scripts/hire.sh {{company_name}} <agent-name>
    ```
+   ※ tiledレイアウトが自動適用され、`max_panes_per_window`（config.json）を超える場合は新しいtmuxウィンドウが作成されます。
 3. `org/roster.json` の `status` を `"active"` に更新
 4. エージェントは `CLAUDE.md` と `.claude/skills/` を自動認識して復帰します
 

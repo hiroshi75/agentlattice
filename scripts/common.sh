@@ -43,6 +43,7 @@ ensure_home() {
   "agentlattice_root": "$AGENTLATTICE_ROOT",
   "default_loop_interval": "5m",
   "default_channels": ["general"],
+  "max_panes_per_window": 4,
   "user_name": "$(whoami)"
 }
 EOF
