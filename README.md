@@ -261,3 +261,10 @@ Claude Code sessions are path-dependent and cannot be transferred. Instead, `exp
 ## License
 
 MIT
+
+## Attribution
+
+This project incorporates source code from the following repositories:
+
+- [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) — Agent persona definitions (`templates/personas/`)
+- [anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins) — Skill definitions (`templates/skills/`)
