@@ -20,6 +20,7 @@ You (natural language) → Management Console (Claude Code)
 
 - **Agents = Claude Code instances**, each with their own `CLAUDE.md` (persona) and `.claude/skills/` (capabilities)
 - **Communication** via JSONL files in shared `org/channels/` — Slack-style with `@mentions`, DMs, and threaded replies (`reply_to`)
+- **CEO-driven autonomy** — a CEO Visionary agent leads the team; the human user acts as a shareholder/advisor, not a manager
 - **Autonomous operation** using Claude Code's `/loop` — agents poll for messages, triage, and execute tasks
 - **Personas** from [agency-agents](https://github.com/msitarzewski/agency-agents) — blendable, with built-in autonomy rules
 - **Skills** from [knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins) (30+ skill definitions)
@@ -152,7 +153,7 @@ Agents communicate by appending JSON lines to shared `.jsonl` files — with sup
 
 Special channels:
 - `general` — team-wide communication
-- `management` — priority channel for management directives (agents check first)
+- `shareholder` — channel for shareholder (user) advice and suggestions; CEO reviews and incorporates into decisions
 - `dm_<name1>_<name2>` — direct messages between two agents
 
 ### Agent Loop Cycle
@@ -201,10 +202,11 @@ Claude Code sessions are path-dependent and cannot be transferred. Instead, `exp
 
 ## Included Templates
 
-### Personas (21)
+### Personas (22)
 
 | Division | Personas |
 |---|---|
+| Leadership | CEO Visionary |
 | Engineering | Frontend Developer, Backend Architect, AI Engineer, Code Reviewer, DevOps Automator, Technical Writer |
 | Marketing | Growth Hacker, SEO Specialist, Content Creator, Reddit Community Builder, Social Media Strategist |
 | Product | Sprint Prioritizer, Trend Researcher, Feedback Synthesizer |
@@ -239,7 +241,7 @@ Claude Code sessions are path-dependent and cannot be transferred. Instead, `exp
 {
   "agentlattice_root": "/path/to/agentlattice",
   "default_loop_interval": "5m",
-  "default_channels": ["general", "management"],
+  "default_channels": ["general", "shareholder"],
   "max_panes_per_window": 4,
   "user_name": "your-username"
 }
@@ -249,7 +251,7 @@ Claude Code sessions are path-dependent and cannot be transferred. Instead, `exp
 |---|---|
 | `agentlattice_root` | Path to the system code (templates, scripts) |
 | `default_loop_interval` | Default `/loop` interval for agents |
-| `default_channels` | Channels auto-created for new companies |
+| `default_channels` | Channels auto-created for new companies (`shareholder` recommended) |
 | `max_panes_per_window` | Max tmux panes per window before overflow to new window |
 | `user_name` | Your name as shown in channel messages |
 

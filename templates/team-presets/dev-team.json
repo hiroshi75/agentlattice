@@ -9,7 +9,7 @@
       "display_name": "PM",
       "personas": ["sprint-prioritizer", "feedback-synthesizer"],
       "skills": ["product-management/feature-spec", "product-management/roadmap-management"],
-      "channels": ["general", "management", "engineering"],
+      "channels": ["general", "shareholder", "engineering"],
       "description": "プロダクトマネージャー。要件定義・優先度判断・進捗管理を担当。",
       "routine_tasks": "タスクボードの整理と優先度の見直し。ブロッカーの検知と解消。"
     },
@@ -50,7 +50,7 @@
       "routine_tasks": "開発チームの成果物を受け取り次第、テストを実施しレポートを作成する。"
     }
   ],
-  "channels": ["general", "management", "engineering"],
+  "channels": ["general", "shareholder", "engineering"],
   "recommended_knowledge": [
     "architecture.md",
     "coding-standards.md",

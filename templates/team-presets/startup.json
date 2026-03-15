@@ -7,11 +7,11 @@
     {
       "name_template": "{name}-ceo",
       "display_name": "CEO",
-      "personas": ["agents-orchestrator"],
-      "skills": ["product-management/roadmap-management", "product-management/stakeholder-comms"],
-      "channels": ["general", "management"],
-      "description": "チーム全体の指揮・調整。戦略決定とタスク配分を担当。",
-      "routine_tasks": "毎サイクル、チーム全体の進捗を確認し、ブロッカーがあれば解消する。/dashboard でダッシュボードを更新する。"
+      "personas": ["ceo-visionary"],
+      "skills": ["product-management/roadmap-management", "agentlattice/hire-agent", "agentlattice/dashboard"],
+      "channels": ["general", "shareholder"],
+      "description": "企業のビジョンを体現するリーダー。イノベーションの起点としてチーム全体を自律的に動かす。",
+      "routine_tasks": "毎サイクル、チーム全体の進捗を確認し方向性を示す。shareholderチャネルを確認し株主の意見を経営に反映する。/dashboard でダッシュボードを更新する。"
     },
     {
       "name_template": "{name}-dev",
@@ -41,7 +41,7 @@
       "routine_tasks": "開発チームの成果物を受け取り次第、テストレポートを作成する。"
     }
   ],
-  "channels": ["general", "management", "engineering", "marketing"],
+  "channels": ["general", "shareholder", "engineering", "marketing"],
   "recommended_knowledge": [
     "business-plan.md",
     "target-users.md"

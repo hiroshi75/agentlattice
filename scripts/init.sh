@@ -34,7 +34,7 @@ mkdir -p "$COMPANY_DIR/org/knowledge" \
 python3 -c "
 import json, os
 config_path = '$AGENTLATTICE_CONFIG'
-channels = ['general', 'management']
+channels = ['general', 'shareholder']
 if os.path.isfile(config_path):
     with open(config_path) as f:
         cfg = json.load(f)
@@ -58,7 +58,7 @@ echo "  ├── org/"
 echo "  │   ├── knowledge/"
 echo "  │   ├── channels/"
 echo "  │   │   ├── general.jsonl"
-echo "  │   │   └── management.jsonl"
+echo "  │   │   └── shareholder.jsonl"
 echo "  │   ├── tasks/"
 echo "  │   │   ├── backlog.jsonl"
 echo "  │   │   └── done.jsonl"

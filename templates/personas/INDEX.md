@@ -45,6 +45,12 @@ These templates are used when hiring agents — multiple personas can be blended
 | `ui-designer.md` | UI Designer | Visual design systems specialist for component libraries, pixel-perfect interfaces, and accessibility |
 | `ux-architect.md` | UX Architect | Technical architecture and UX foundation specialist providing CSS systems and implementation guidance |
 
+## Leadership (1 persona)
+
+| File | Name | Description |
+|------|------|-------------|
+| `ceo-visionary.md` | CEO Visionary | 先見性と実行力を兼ね備えた企業リーダー。チーム全体のイノベーションの起点となり自律的に組織を動かす |
+
 ## Specialized (4 personas)
 
 | File | Name | Description |

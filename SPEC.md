@@ -81,7 +81,7 @@ agentlattice/
 {
   "agentlattice_root": "/Users/ayu/dev/agentlattice",
   "default_loop_interval": "5m",
-  "default_channels": ["general", "management"],
+  "default_channels": ["general", "shareholder"],
   "max_panes_per_window": 4,
   "dashboard_port": 8390,
   "user_name": "ayu"
@@ -92,7 +92,7 @@ agentlattice/
 |---|---|---|
 | `agentlattice_root` | string | システムコード（テンプレート・スクリプト）のパス |
 | `default_loop_interval` | string | `/loop` のデフォルト間隔 |
-| `default_channels` | string[] | 企業初期化時に自動作成するチャネル（`management` を含めることを推奨） |
+| `default_channels` | string[] | 企業初期化時に自動作成するチャネル（`shareholder` を含めることを推奨） |
 | `max_panes_per_window` | number | 1つのtmuxウィンドウあたりの最大ペイン数（デフォルト: 4）。超過時は新しいウィンドウを作成 |
 | `dashboard_port` | number | ダッシュボードサーバーのポート番号（デフォルト: 8390） |
 | `user_name` | string | 管理コンソールの送信者名 |
@@ -145,7 +145,7 @@ agentlattice/
 #### チャネル種別
 
 - `general` — 全体連絡用（デフォルト）
-- `management` — management専用指示チャネル（エージェントは最優先で確認）
+- `shareholder` — 株主・アドバイザーからの意見・提案用チャネル（CEOが確認し経営判断に反映）
 - 業務別チャネル（`engineering`, `marketing` 等）— 必要に応じて作成
 - DMはチャネルを使わず `to` フィールドで実現（ファイルは `channels/dm_<a>_<b>.jsonl`）
 

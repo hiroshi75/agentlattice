@@ -9,7 +9,7 @@
       "display_name": "Strategist",
       "personas": ["growth-hacker", "trend-researcher"],
       "skills": ["marketing/campaign-planning", "marketing/competitive-analysis"],
-      "channels": ["general", "management", "marketing"],
+      "channels": ["general", "shareholder", "marketing"],
       "description": "コンテンツ戦略担当。市場調査に基づく戦略立案と効果測定。",
       "routine_tasks": "毎サイクル、競合コンテンツの動向をチェックし、コンテンツカレンダーを更新する。"
     },
@@ -41,7 +41,7 @@
       "routine_tasks": "毎サイクル、SNSのエンゲージメントデータを確認し、投稿アイデアを1つ提案する。"
     }
   ],
-  "channels": ["general", "management", "marketing"],
+  "channels": ["general", "shareholder", "marketing"],
   "recommended_knowledge": [
     "brand-guidelines.md",
     "target-audience.md",
